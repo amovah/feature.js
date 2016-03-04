@@ -8,7 +8,6 @@ var pjson = require('./package.json');
 
 gulp.task('build', function () {
   return gulp.src(['./feature.js'])
-  
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
     .pipe(uglify('feature.min.js'))
@@ -16,3 +15,5 @@ gulp.task('build', function () {
     .pipe(rename({extname: '.min.js'}))
     .pipe(gulp.dest('./'));
 });
+
+gulp.task('default', ['build']);
