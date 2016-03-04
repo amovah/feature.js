@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/viljamis/feature.js.git"
+    "url": "git+https://github.com/amovah/feature.js.git"
   },
-  "author": "Viljami Salminen",
+  "author": "Viljami Salminen, Ali Movahedi <ali_movahedi@aol.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/viljamis/feature.js/issues"
+    "url": "https://github.com/amovah/feature.js/issues"
   },
-  "homepage": "https://github.com/viljamis/feature.js#readme",
+  "homepage": "https://github.com/amovah/feature.js#readme",
   "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-insert": "^0.5.0",

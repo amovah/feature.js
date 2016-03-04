@@ -78,49 +78,65 @@
 
   var Feature = {
     // Test if CSS 3D transforms are supported
-    css3Dtransform : (function() {
+    css3Dtransform : function() {
       var test = (!util.old && util.pfx("perspective") !== null);
       return !!test;
-    })(),
+    },
 
     // Test if CSS transforms are supported
-    cssTransform : (function() {
+    cssTransform : function() {
       var test = (!util.old && util.pfx("transformOrigin") !== null);
       return !!test;
-    })(),
+    },
 
     // Test if CSS transitions are supported
-    cssTransition : (function() {
+    cssTransition : function() {
       var test = util.pfx("transition") !== null;
       return !!test;
-    })(),
+    },
 
     // Test if addEventListener is supported
-    addEventListener : !!window.addEventListener,
+    addEventListener : function() {
+      return !!window.addEventListener;
+    },
 
     // Test if querySelectorAll is supported
-    querySelectorAll : !!document.querySelectorAll,
+    querySelectorAll : function() {
+      return document.querySelectorAll;
+    },
 
     // Test if matchMedia is supported
-    matchMedia : !!window.matchMedia,
+    matchMedia : function() {
+      return window.matchMedia;
+    },
 
     // Test if Device Motion is supported
-    deviceMotion : ("DeviceMotionEvent" in window),
+    deviceMotion : function() {
+      return ("DeviceMotionEvent" in window);
+    },
 
     // Test if Device Orientation is supported
-    deviceOrientation : ("DeviceOrientationEvent" in window),
+    deviceOrientation : function() {
+      return ("DeviceOrientationEvent" in window);
+    },
 
     // Test if Context Menu is supported
-    contextMenu : ("contextMenu" in docEl && "HTMLMenuItemElement" in window),
+    contextMenu : function() {
+      return ("contextMenu" in docEl && "HTMLMenuItemElement" in window);
+    },
 
     // Test if classList API is supported
-    classList : ("classList" in docEl),
+    classList : function() {
+      return ("classList" in docEl);
+    },
 
     // Test if placeholder attribute is supported
-    placeholder : ("placeholder" in util.create("input")),
+    placeholder : function() {
+      return ("placeholder" in util.create("input"));
+    },
 
     // Test if localStorage is supported
-    localStorage : (function() {
+    localStorage : function() {
       var test = "x";
       try {
         localStorage.setItem(test, test);
@@ -129,16 +145,21 @@
       } catch(err) {
         return false;
       }
-    })(),
+    },
 
     // Test if History API is supported
-    historyAPI : (window.history && "pushState" in window.history),
+    historyAPI : function() {
+      return (window.history && "pushState" in window.history);
+    },
 
     // Test if ServiceWorkers are supported
-    serviceWorker : ("serviceWorker" in navigator),
+    serviceWorker : function() {
+      return ("serviceWorker" in navigator);
+    },
 
     // Test if viewport units are supported
-    viewportUnit : (function(el) {
+    viewportUnit : function() {
+      var el = util.create('dummy');
       try {
         el.style.width = "1vw";
         var test = el.style.width !== "";
@@ -146,10 +167,11 @@
       } catch(err) {
         return false;
       }
-    })(util.create("dummy")),
+    },
 
     // Test if REM units are supported
-    remUnit : (function(el) {
+    remUnit : function() {
+      var el = util.create('dummy');
       try {
         el.style.width = "1rem";
         var test = el.style.width !== "";
@@ -157,55 +179,75 @@
       } catch(err) {
         return false;
       }
-    })(util.create("dummy")),
+    },
 
     // Test if Canvas is supported
-    canvas : (function(el) {
+    canvas : function() {
+      var el = util.create('dummy');
       return !!(el.getContext && el.getContext("2d"));
-    })(util.create("canvas")),
+    },
 
     // Test if SVG is supported
-    svg : !!document.createElementNS && !!document.createElementNS("http://www.w3.org/2000/svg", "svg").createSVGRect,
+    svg : function() {
+      return !!document.createElementNS && !!document.createElementNS("http://www.w3.org/2000/svg", "svg").createSVGRect;
+    },
 
     // Test if WebGL is supported
-    webGL : (function(el) {
+    webGL : function() {
+      var el = util.create('dummy');
       try {
         return !!(window.WebGLRenderingContext && (el.getContext("webgl") || el.getContext("experimental-webgl")));
       } catch(err) {
         return false;
       }
-    })(util.create("canvas")),
+    },
 
     // Test if cors is supported
-    cors : ("XMLHttpRequest" in window && "withCredentials" in new XMLHttpRequest()),
+    cors : function() {
+      return ("XMLHttpRequest" in window && "withCredentials" in new XMLHttpRequest());
+    },
 
     // Tests if touch events are supported, but doesn't necessarily reflect a touchscreen device
-    touch : !!(("ontouchstart" in window) || window.navigator && window.navigator.msPointerEnabled && window.MSGesture || window.DocumentTouch && document instanceof DocumentTouch),
+    touch : function() {
+      return !!(("ontouchstart" in window) || window.navigator && window.navigator.msPointerEnabled && window.MSGesture || window.DocumentTouch && document instanceof DocumentTouch);
+    },
 
     // Test if async attribute is supported
-    async : ("async" in util.create("script")),
+    async : function() {
+      return ("async" in util.create("script"));
+    },
 
     // Test if defer attribute is supported
-    defer : ("defer" in util.create("script")),
+    defer : function() {
+      return ("defer" in util.create("script"));
+    },
 
     // Test if Geolocation is supported
-    geolocation : ("geolocation" in navigator),
+    geolocation : function() {
+      return ("geolocation" in navigator);
+    },
 
     // Test if img srcset attribute is supported
-    srcset : ("srcset" in util.create("img")),
+    srcset : function() {
+      return ("srcset" in util.create("img"));
+    },
 
     // Test if img sizes attribute is supported
-    sizes : ("sizes" in util.create("img")),
+    sizes : function() {
+      return ("sizes" in util.create("img"));
+    },
 
     // Test if Picture element is supported
-    pictureElement : ("HTMLPictureElement" in window),
+    pictureElement : function() {
+      return ("HTMLPictureElement" in window);
+    },
 
     // Run all the tests and add supported classes
     testAll : function() {
       var classes = " js";
       for (var test in this) {
         if (test !== "testAll" && test !== "constructor" && this[test]) {
-          classes += " " + test;
+          classes += " " + test();
         }
       }
       docEl.className += classes.toLowerCase();
