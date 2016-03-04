@@ -11,7 +11,7 @@ With [Feature.js](http://featurejs.com/), it’s simple to build progressively e
 First, include the script somewhere on your page — usually either in the ```<head>``` or just before the  ```</body>``` closing tag. No need to initialize or do anything else really, all the feature tests are now available for usage:
 
 ```javascript
-if (feature.webGL) {
+if (feature.webGL()) {
   console.log("WebGL supported");
 } else {
   console.log("WebGL not supported");
@@ -21,7 +21,7 @@ if (feature.webGL) {
 If you want to add a class to the ```<html>``` element like [Modernizr](http://modernizr.com) does when something is supported, that’s simple:
 
 ```javascript
-if (feature.webGL) {
+if (feature.webGL()) {
   document.documentElement.className += " webgl";
 }
 ```
@@ -29,7 +29,7 @@ if (feature.webGL) {
 If you’re using [jQuery](http://jquery.com/), it’s even more simple:
 
 ```javascript
-if (feature.webGL) {
+if (feature.webGL()) {
   $("html").addClass("webgl");
 }
 ```
@@ -37,7 +37,7 @@ if (feature.webGL) {
 Combining multiple feature tests is possible too, you can just write an if statement like:
 
 ```javascript
-if (feature.canvas && feature.webGL) {
+if (feature.canvas() && feature.webGL()) {
   console.log("Canvas and WebGL are supported")
 }
 ```
@@ -46,7 +46,7 @@ When you want to target JavaScript only towards browsers that support the featur
 
 ```javascript
 (function() {
-  if (!feature.webGL || !feature.svg) {
+  if (!feature.webGL() || !feature.svg()) {
     console.log("Stopping… WebGL or SVG isn’t supported");
     return;
   }
@@ -104,20 +104,9 @@ feature.viewportUnit
 feature.webGL
 ```
 
-
-
-## Live demo
-
-* Official site with live tests: [http://featurejs.com](http://featurejs.com)
-* Test with actual features: [http://featurejs.com/test](http://featurejs.com/test)
-
-
-
 ## Download
 
-* [Download the latest release](https://github.com/viljamis/feature.js/archive/master.zip)
-* Install by running `npm install feature.js`
-
+* [Download the latest release](https://github.com/amovah/feature.js/archive/master.zip)
 
 
 ## Working on the project
@@ -135,9 +124,9 @@ To build feature.min.js run the following command:
 
 ```shell
 $ gulp build
+// or
+$ gulp
 ```
-
-
 
 ## Tested on the following platforms
 
@@ -159,33 +148,9 @@ $ gulp build
 
 
 
-## License
-
-The MIT License (MIT)
-
-Copyright (c) 2016 [Viljami Salminen](https://viljamis.com/)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-
-
 ## Changelog
+
+`1.1.0` (2016-03-04) - Changing API
 
 `1.0.1` (2016-01-31) - Code optimization, gulp build task, npm support.
 

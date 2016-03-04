@@ -137,11 +137,8 @@
 
     // Test if localStorage is supported
     localStorage : function() {
-      var test = "x";
       try {
-        localStorage.setItem(test, test);
-        localStorage.removeItem(test);
-        return true;
+        return ('setItem' in localStorage && 'removeItem' in localStorage);
       } catch(err) {
         return false;
       }
